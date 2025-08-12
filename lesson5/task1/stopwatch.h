@@ -14,18 +14,16 @@ public:
     explicit Stopwatch(QObject *parent = nullptr);
 
     void on_start_stop();
-    void setTextTimer();
-    void setBrowserText();
+    int setTextTimer();
+    int setBrowserText(int lap_count);
     void clear();
 
     bool isTimer = false;
     QTime startTime;
     QTimer *timer;
     QTime lastLapTime;
-    int lapCount = 1;
-    QString butStartStopText = "";
-    QString timerText = "";
-    QString lapBrowserText = "";
+    //int lapCount = 1;
+    //QString lapBrowserText = "";
 
 };
 

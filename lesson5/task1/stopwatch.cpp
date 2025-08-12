@@ -3,48 +3,44 @@
 
 Stopwatch::Stopwatch(QObject *parent) : QObject(parent)
 {
+    timer = new QTimer(this);
+    timer->setInterval(100);
 
 }
     void Stopwatch::on_start_stop() {
         if (!isTimer) {
                startTime = QTime::currentTime();
-               timer->start(100);
-               butStartStopText = "Стоп";
+               timer->start();
                isTimer = true;
-
-
               } else {
                timer->stop();
-               butStartStopText = "Старт";
                isTimer = false;
               }
     }
 
-    void Stopwatch::setTextTimer() {
+    int Stopwatch::setTextTimer() {
         QTime currentTime = QTime::currentTime();
-        int elapsedSeconds = startTime.secsTo(currentTime);
-        timerText = QTime(0, 0, 0).addSecs(elapsedSeconds).toString("hh:mm:ss");
+        int time = startTime.msecsTo(currentTime);
+        return time;
     }
 
-    void Stopwatch::setBrowserText() {
+    int Stopwatch::setBrowserText(int lap_count) {
+        int set_times;
         if (isTimer) {
                   QTime currentTime = QTime::currentTime();
-                  int elapsedMs;
-                  if (lapCount == 1) {
-                      elapsedMs = startTime.msecsTo(currentTime);
+                  if (lap_count == 1) {
+                      set_times = startTime.msecsTo(currentTime);
                   } else {
-                      elapsedMs = lastLapTime.msecsTo(currentTime);
+                      set_times = lastLapTime.msecsTo(currentTime);
+
                   }
-                   lapBrowserText = QString("Круг %1, время: %2 сек").arg(lapCount).arg(elapsedMs / 1000.0, 0, 'f', 2);
                    lastLapTime = currentTime;
-                   lapCount++;
+                   return set_times;
                }
     }
 
     void Stopwatch::clear() {
         isTimer = false;
-        butStartStopText = "Старт";
-        lapCount = 1;
         startTime = QTime();
         lastLapTime = QTime();
             if ( timer->isActive()) {

@@ -14,7 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->lapBut->setEnabled(false);
     stopwatch = new Stopwatch(this);
-    stopwatch->timer = new QTimer(this);
     connect(stopwatch->timer, &QTimer::timeout, this, &::MainWindow::updateTimer, Qt::AutoConnection);
     connect( ui->lapBut, &QPushButton::clicked, this, &MainWindow::setBrowser, Qt::AutoConnection);
     connect(ui->startBut, &QPushButton::clicked, this, &MainWindow::startBut, Qt::AutoConnection);
@@ -30,24 +29,29 @@ void MainWindow::startBut()
 {
     if (!stopwatch->isTimer) {
         ui->lapBut->setEnabled(true);
+        ui->startBut->setText("Стоп");
     } else {
         ui->lapBut->setEnabled(false);
+        ui->startBut->setText("Старт");
     }
-
     stopwatch->on_start_stop();
-    ui->startBut->setText(stopwatch->butStartStopText);
 }
 
 void MainWindow::updateTimer()
 {
-    stopwatch->setTextTimer();
-    ui->timer->setText(stopwatch->timerText);
+    int time;
+    time = stopwatch->setTextTimer();
+    timerText = QTime(0, 0, 0).addMSecs(time).toString("hh:mm:ss.zzz");
+    ui->timer->setText(timerText);
 }
 
 void MainWindow::setBrowser()
 {
-    stopwatch->setBrowserText();
-    ui->lap->append(stopwatch->lapBrowserText);
+    int elapsedMs = 0;
+    elapsedMs = stopwatch->setBrowserText(lapCount);
+    lapBrowserText  = QString("Круг %1, время: %2 сек").arg(lapCount).arg(elapsedMs / 1000.0, 0, 'f', 2);
+    ui->lap->append(lapBrowserText);
+    lapCount++;
 
 }
 
@@ -55,6 +59,7 @@ void MainWindow::clearTimerAndLap()
 {
     stopwatch->clear();
     ui->lap->clear();
-    ui->timer->setText("");
+    stopwatch->on_start_stop();
+    lapCount = 1;
 }
 

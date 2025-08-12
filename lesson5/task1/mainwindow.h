@@ -28,9 +28,14 @@ public slots:
     void setBrowser();
     void clearTimerAndLap();
 
+
+
 private:
     Ui::MainWindow *ui;
     Stopwatch *stopwatch;
+    QString timerText = "";
+    int lapCount = 1;
+    QString lapBrowserText = "";
 
 };
 #endif // MAINWINDOW_H
