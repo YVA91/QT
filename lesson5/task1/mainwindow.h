@@ -24,7 +24,7 @@ public:
 
 public slots:
     void startBut();
-    void updateTimer();
+    void updateTimer(const QString& time);
     void setBrowser();
     void clearTimerAndLap();
 
@@ -32,10 +32,12 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
-    Stopwatch *stopwatch;
+    Stopwatch stopwatch;
     QString timerText = "";
     int lapCount = 1;
     QString lapBrowserText = "";
+    bool isTimer = false;
+    int elapsedMs;
 
 };
 #endif // MAINWINDOW_H

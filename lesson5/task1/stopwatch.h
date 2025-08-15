@@ -11,20 +11,22 @@ class Stopwatch : public QObject
     Q_OBJECT
 
 public:
-    explicit Stopwatch(QObject *parent = nullptr);
+   explicit Stopwatch(QObject *parent = nullptr);
 
-    void on_start_stop();
-    int setTextTimer();
-    int setBrowserText(int lap_count);
+signals:
+    void SetStopWath(const QString& time);
+
+ public slots:
+    void on_start();
+    void on_stop();
+    void  setTextTimer();
+    int setBrowserText();
     void clear();
 
-    bool isTimer = false;
+ private:
     QTime startTime;
     QTimer *timer;
     QTime lastLapTime;
-    //int lapCount = 1;
-    //QString lapBrowserText = "";
-
 };
 
 #endif // STOPWATCH_H
