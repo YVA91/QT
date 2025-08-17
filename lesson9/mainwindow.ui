@@ -6,32 +6,43 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>823</width>
-    <height>612</height>
+    <width>747</width>
+    <height>432</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
      <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="0">
+       <widget class="QTextEdit" name="te_send"/>
+      </item>
       <item row="1" column="1">
        <widget class="QTextEdit" name="te_result"/>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="lb_receiveData_2">
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pb_send">
         <property name="text">
-         <string>Cообщение для отправки</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <string>Отправить Датаграмму</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QTextEdit" name="te_send"/>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="pb_stop">
+        <property name="text">
+         <string>Остановить передачу</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="pb_start">
+        <property name="text">
+         <string>Начать передачу</string>
+        </property>
+       </widget>
       </item>
       <item row="0" column="1">
        <widget class="QLabel" name="lb_receiveData">
@@ -43,10 +54,13 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="pb_send">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lb_mess">
         <property name="text">
-         <string>Отправить Датаграмму</string>
+         <string>Сообщение</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>

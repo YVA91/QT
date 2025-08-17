@@ -20,12 +20,26 @@ public:
     ~MainWindow();
 
 private slots:
+    void on_pb_start_clicked();
+    void DisplayTime(QDateTime data);
+    void on_pb_stop_clicked();
 
-    void DisplayTime(QHostAddress senderAddress, qint64 size);
+
+    void MyDisplayTime(QHostAddress senderAddress, qint64 size);
+
+
+
+
+
     void on_pb_send_clicked();
 
 private:
     Ui::MainWindow *ui;
+    QTimer* timer;
     UDPworker* udpWorker;
+    uint32_t counterPck = 0;
+
+
+
 };
 #endif // MAINWINDOW_H
